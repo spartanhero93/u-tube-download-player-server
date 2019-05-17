@@ -12,5 +12,8 @@
   "dependencies": {
     "@microlink/youtube-dl": "^1.13.3",
     "dotenv": "^8.0.0"
+  },
+  "devDependencies": {
+    "express": "^4.17.0"
   }
 }
