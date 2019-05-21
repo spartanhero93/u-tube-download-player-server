@@ -13,8 +13,11 @@ const fetchVideos = url => {
     console.log(info.size)
 
     if (info._filename) {
-      video.pipe(fs.createWriteStream(info._filename))
-
+      video.pipe(
+        fs.createWriteStream(
+          `./media/test/${info._filename}`
+        )
+      )
       return true
     }
   })
