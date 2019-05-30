@@ -1,5 +1,6 @@
 const youtubedl = require('@microlink/youtube-dl')
 const fs = require('fs')
+const VideoModel = require('../models/videos')
 
 const fetchVideos = url => {
   const video = youtubedl(
@@ -18,7 +19,14 @@ const fetchVideos = url => {
           `./media/test/${info._filename}`
         )
       )
-      return true
+      const newVideo = new VideoModel({
+        title: info._filename
+      })
+      newVideo.save(error =>
+        error
+          ? console.log(error)
+          : console.log('Save video title!')
+      )
     }
   })
 }

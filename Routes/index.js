@@ -1,6 +1,17 @@
 const router = require('express').Router()
 const fetchVideos = require('../utils')
 const fs = require('fs')
+const VideoModel = require('../models/videos')
+
+router.get('/getVideos', (req, res) => {
+  VideoModel.find({}, (err, list) => {
+    err
+      ? console.log(err)
+      : list.length
+        ? res.send(list)
+        : res.send('list empty!')
+  })
+})
 
 router.get('/stream', (req, res) => {
   const video1 =
@@ -35,10 +46,7 @@ router.get('/stream', (req, res) => {
 
 router.post('/:id', async (req, res) => {
   console.log(req.params.id)
-  const result = await fetchVideos(req.params.id)
-  result
-    ? res.send({ data: 'success' })
-    : res.send({ data: 'failure' })
+  fetchVideos(req.params.id)
 })
 
 module.exports = router
