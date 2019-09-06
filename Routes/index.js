@@ -5,17 +5,12 @@ const VideoModel = require('../models/videos')
 
 router.get('/getVideos', (req, res) => {
   VideoModel.find({}, (err, list) => {
-    err
-      ? console.log(err)
-      : list.length
-        ? res.send(list)
-        : res.send('list empty!')
+    err ? console.log(err) : list.length ? res.send(list) : res.send('list empty!')
   })
 })
 
 router.get('/stream', (req, res) => {
-  const video1 =
-    "./media/test/When You're Suspended From Hogwarts-tAfi0X-cJag.mp4"
+  const video1 = "./media/test/When You're Suspended From Hogwarts-tAfi0X-cJag.mp4"
   const stat = fs.statSync(video1)
   const { size } = stat
   const range = req.headers.range
@@ -45,7 +40,6 @@ router.get('/stream', (req, res) => {
 })
 
 router.post('/:id', async (req, res) => {
-  console.log(req.params.id)
   fetchVideos(req.params.id)
 })
 
